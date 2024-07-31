@@ -1,12 +1,19 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(
+  cors({
+    methods: ['GET', 'POST'],
+    origin: ['http://localhost:3000'],
+  })
+);
 
 // Path to the JSON file
 const testimonialsFilePath = path.join(__dirname, 'testimonials.json');
