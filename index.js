@@ -16,13 +16,19 @@ app.use(
 );
 
 // Path to the JSON file
-const testimonialsFilePath = path.join(__dirname, 'testimonials.json');
+const testimonialsFilePath =
+  process.env.NODE_ENV === 'production'
+    ? path.join('/tmp', 'testimonials.json')
+    : path.join(__dirname, 'testimonials.json');
 
 // Read testimonials from the JSON file
 const readTestimonials = () => {
   try {
-    const data = fs.readFileSync(testimonialsFilePath, 'utf8');
-    return JSON.parse(data);
+    if (fs.existsSync(testimonialsFilePath)) {
+      const data = fs.readFileSync(testimonialsFilePath, 'utf8');
+      return JSON.parse(data);
+    }
+    return [];
   } catch (error) {
     console.error('Error reading testimonials file:', error);
     return [];
