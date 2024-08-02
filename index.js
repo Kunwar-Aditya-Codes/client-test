@@ -52,7 +52,7 @@ app.get('/testimonials', (req, res) => {
 app.post('/testimonials', (req, res) => {
   const newTestimonial = req.body;
   if (
-    !newTestimonial.username ||
+    !newTestimonial.clientName ||
     !newTestimonial.review ||
     !newTestimonial.rating ||
     !newTestimonial.date
