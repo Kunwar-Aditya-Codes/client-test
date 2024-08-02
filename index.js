@@ -18,7 +18,7 @@ app.use(
 // Path to the JSON file
 const testimonialsFilePath =
   process.env.NODE_ENV === 'production'
-    ? path.join('/tmp', 'testimonials.json')
+    ? path.join(process.cwd(), 'testimonials.json')
     : path.join(__dirname, 'testimonials.json');
 
 // Read testimonials from the JSON file
