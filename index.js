@@ -51,8 +51,13 @@ app.get('/testimonials', (req, res) => {
 // POST route to add a new testimonial
 app.post('/testimonials', (req, res) => {
   const newTestimonial = req.body;
-  if (!newTestimonial.name || !newTestimonial.message) {
-    return res.status(400).json({ error: 'Name and message are required' });
+  if (
+    !newTestimonial.username ||
+    !newTestimonial.review ||
+    !newTestimonial.rating ||
+    !newTestimonial.date
+  ) {
+    return res.status(400).json({ error: 'All fields required!' });
   }
 
   const testimonials = readTestimonials();
